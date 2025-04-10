@@ -32,7 +32,7 @@ class GameSprite(sprite.Sprite):
         self.rect.x = player_x
         self.rect.y = player_y
 
-    def reset(self):
+    def update1(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
 #класс-наследник для спрайта-игрока (управляется стрелками)
@@ -41,23 +41,32 @@ class Player(GameSprite):
         keys = key.get_pressed()
         if keys[K_UP] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys[K_DOWN] and self.rect.y < win_height - 80:
+        if keys[K_DOWN] and self.rect.y < height - 80:
             self.rect.y += self.speed
     def update_l(self):
         keys = key.get_pressed()
         if keys[K_w] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys[K_s] and self.rect.y < win_height - 80:
+        if keys[K_s] and self.rect.y < height - 80:
             self.rect.y += self.speed
 
 
-plr1 =Player("racket.png",50,250,5,10,10)
+plr1 =Player("racket.png",10,250,1,55,55)
+plr2 =Player("racket.png", widht - 90 ,10,1,55,55)
+mah =Player("tenis_ball.png", 250 ,-250,3,55,55)
 game= True
 
 while game:
+    window.fill((255,255,132))
     for e in event.get():
         if e.type == QUIT:
             game = False
+    plr1.update1()
+    plr2.update1()
+    mah.update1()
+    plr1.update_l()
+    plr2.update_r()
+
     
     
     
